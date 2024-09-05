@@ -18,8 +18,8 @@ public class CadastroDAO {
     public List<Cadastro> getEstudantes() {
         String sql = "select * from tb_estudante";
 
-        return db.query(sql, (res, rowNum) -> {
-            return new Cadastro(
+        return db.query(sql, (res, rowNum) ->
+            new Cadastro(
                 res.getInt("id"),
                 res.getString("nome"),
                 res.getString("cpf"),
@@ -28,8 +28,8 @@ public class CadastroDAO {
                 res.getString("instituicao"),
                 res.getString("curso"),
                 res.getString("periodo")
-            );
-        });
+            )
+        );
     }
     
 
