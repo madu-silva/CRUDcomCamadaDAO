@@ -38,8 +38,7 @@ public class CadastroDAO {
 
         return db.query(sql,
                         new BeanPropertyRowMapper<>(Cadastro.class),
-                        new Object[]{"%" + instituicao + "%"}
-        );
+                "%" + instituicao + "%");
     }
 
 
@@ -48,7 +47,7 @@ public class CadastroDAO {
 
         List<Cadastro> estudantes = db.query(sql,
             new BeanPropertyRowMapper<>(Cadastro.class),
-            new Object[]{id});
+                id);
         
         if(!estudantes.isEmpty())
             return estudantes.get(0);
@@ -59,22 +58,22 @@ public class CadastroDAO {
     public void inserirEstudante(Cadastro estudante) {
         String sql = "insert into tb_estudante(id, nome, cpf, email, telefone, instituicao, curso, periodo) values(?,?,?,?,?,?,?,?)";
     
-        db.update(sql, new Object[]{estudante.getId(), estudante.getNome(), estudante.getCpf(), estudante.getEmail(),
-            estudante.getTelefone(), estudante.getInstituicao(), estudante.getCurso(), estudante.getPeriodo()});
+        db.update(sql, estudante.getId(), estudante.getNome(), estudante.getCpf(), estudante.getEmail(),
+                estudante.getTelefone(), estudante.getInstituicao(), estudante.getCurso(), estudante.getPeriodo());
     }
 
 
     public void updateEstudante(Cadastro estudante) {
         String sql = "update tb_estudante set nome = ?, cpf = ?, email = ?, telefone = ?, instituicao = ?, curso = ?, periodo = ? where id = ?";
 
-        db.update(sql, new Object[]{estudante.getNome(), estudante.getCpf(), estudante.getEmail(),
-            estudante.getTelefone(), estudante.getInstituicao(), estudante.getCurso(), estudante.getPeriodo(), estudante.getId()});
+        db.update(sql, estudante.getNome(), estudante.getCpf(), estudante.getEmail(),
+                estudante.getTelefone(), estudante.getInstituicao(), estudante.getCurso(), estudante.getPeriodo(), estudante.getId());
     }
 
     public void deleteEstudante(int id) {
         String sql = "delete from tb_estudante where id = ?";
 
-        db.update(sql,new Object[]{id});
+        db.update(sql, id);
     }
 
 }
