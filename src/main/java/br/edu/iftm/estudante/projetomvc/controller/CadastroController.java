@@ -1,6 +1,5 @@
 package br.edu.iftm.estudante.projetomvc.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +12,11 @@ import br.edu.iftm.estudante.projetomvc.domain.Cadastro;
 @Controller
 public class CadastroController {
     
-    @Autowired
-    private CadastroDAO dao;
+    private final CadastroDAO dao;
+
+    public CadastroController(CadastroDAO dao) {
+        this.dao = dao;
+    }
 
     @RequestMapping("estudantes")
     public String getEstudantes(Model model) {
