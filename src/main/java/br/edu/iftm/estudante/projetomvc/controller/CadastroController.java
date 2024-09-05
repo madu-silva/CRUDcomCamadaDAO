@@ -13,6 +13,8 @@ import br.edu.iftm.estudante.projetomvc.domain.Cadastro;
 public class CadastroController {
     
     private final CadastroDAO dao;
+    private static final String ESTUDANTE = "estudante";
+    private static final String ESTUDANTES = "estudantes";
 
     public CadastroController(CadastroDAO dao) {
         this.dao = dao;
@@ -20,13 +22,13 @@ public class CadastroController {
 
     @RequestMapping("estudantes")
     public String getEstudantes(Model model) {
-        model.addAttribute("estudante",new Cadastro());
-        model.addAttribute("estudantes",dao.getEstudantes());
+        model.addAttribute(ESTUDANTE, new Cadastro());
+        model.addAttribute(ESTUDANTES, dao.getEstudantes());
         return "estudantesList";
     }
 
     @PostMapping("estudantes")
-    public String inserirEstudantes(Cadastro estudante,Model model) {
+    public String inserirEstudantes(Cadastro estudante, Model model) {
         Cadastro estudanteDb = dao.getEstudante(estudante.getId());
         if (estudanteDb == null) {
             dao.inserirEstudante(estudante);
@@ -39,8 +41,8 @@ public class CadastroController {
 
     @RequestMapping("estudantesParametro")
     public String getEstudantes(@RequestParam(value = "instituicao", required = true) String instituicao, Model model) {
-        model.addAttribute("estudantes",dao.getEstudantes(instituicao));
-        model.addAttribute("estudante",new Cadastro());
+        model.addAttribute(ESTUDANTES, dao.getEstudantes(instituicao));
+        model.addAttribute(ESTUDANTE, new Cadastro());
         return "estudantesList";
     }
 
@@ -53,8 +55,8 @@ public class CadastroController {
     @RequestMapping("editarEstudante")
     public String editarContato(@RequestParam(value = "id", required = true) int id, Model model) {
         Cadastro estudante = dao.getEstudante(id);
-        model.addAttribute("estudante", estudante);
-        model.addAttribute("estudantes", dao.getEstudantes());
+        model.addAttribute(ESTUDANTE, estudante);
+        model.addAttribute(ESTUDANTES, dao.getEstudantes());
         return "estudantesList";
     }
 }
