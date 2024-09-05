@@ -50,7 +50,7 @@ public class CadastroDAO {
             new BeanPropertyRowMapper<>(Cadastro.class),
             new Object[]{id});
         
-        if(estudantes != null && estudantes.size() > 0) 
+        if(!estudantes.isEmpty())
             return estudantes.get(0);
         else
             return null;
