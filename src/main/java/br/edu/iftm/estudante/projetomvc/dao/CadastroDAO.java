@@ -12,8 +12,12 @@ import java.util.List;
 @Component
 public class CadastroDAO {
 
-    @Autowired
+    final
     JdbcTemplate db;
+
+    public CadastroDAO(JdbcTemplate db) {
+        this.db = db;
+    }
 
     public List<Cadastro> getEstudantes() {
         String sql = "select * from tb_estudante";
